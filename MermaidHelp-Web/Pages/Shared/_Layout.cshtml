@@ -1,0 +1,45 @@
+﻿@{
+    var F = Html.F();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Html.Raw(ViewBag.Title)-MermaidHelp</title>
+
+    @F.RenderCss()
+    <link href="~/res/css/common.css" rel="stylesheet" type="text/css" />
+    @RenderSection("head", false)
+</head>
+<body>
+    @Html.AntiForgeryToken()
+
+    @{
+        var pm = F.PageManager;
+
+        // 主题
+        var themeCookie = Context.Request.Cookies["Theme"];
+        if (!String.IsNullOrEmpty(themeCookie))
+        {
+            string themeValue = themeCookie;
+
+            Theme theme;
+            if (Enum.TryParse<Theme>(themeValue, true, out theme))
+            {
+                pm.CustomTheme(String.Empty);
+                pm.Theme(theme);
+            }
+            else
+            {
+                pm.CustomTheme(themeValue);
+            }
+        }
+    }
+    @F.PageManager
+
+    @RenderSection("body", true)
+
+    @F.RenderScript()
+    @RenderSection("script", false)
+</body>
+</html>

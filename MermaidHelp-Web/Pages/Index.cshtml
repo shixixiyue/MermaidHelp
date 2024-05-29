@@ -1,0 +1,153 @@
+﻿@page
+@model MermaidHelp.Pages.IndexModel
+@{
+    ViewBag.Title = "起始页面";
+    var F = Html.F();
+}
+
+@functions {
+}
+@section head{
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+    <style>
+        #rightPanel_Content {
+            margin: 1rem;
+            text-align: center;
+        }
+        pre {
+            margin: 0px;
+        }
+        .hljs {
+            background-color: unset;
+        }
+        .hljs-ln {
+            padding-bottom: 1.2rem;
+            margin: 0rem !important;
+        }
+
+        .hljs-ln td {
+            border: none !important;
+            padding: 2px 6px !important;
+            line-height: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .hljs-ln tr td:first-child {
+            color: cadetblue;
+            border-right: 1px solid !important;
+        }
+
+        .hljs-ln tr {
+            border: none !important;
+        }
+
+        .history {
+            margin: 1rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: #eee;
+        }
+    </style>
+}
+@section body {
+    <f:Panel ID="mainPanel" IsViewPort="true" NoBorderAndHeader Layout="@LayoutType.HBox" BodyPadding="5">
+        <Items>
+            <f:Panel ID="leftPanel" BoxFlex="2" NoBorderAndHeader Layout="@LayoutType.VBox" BodyPadding="5">
+                <Items>
+                    <f:ContentPanel Title="代码" ID="codePanel" BoxFlex="1" AutoScroll="true" EnableCollapse="true"
+                                    Expanded="true" Layout="@LayoutType.Fit" ShowBorder="true">
+                    </f:ContentPanel>
+                    <f:Panel ID="textPanel" BoxFlex="2" Expanded="true" Layout="@LayoutType.VBox" MarginTop="5">
+                        <Items>
+                            <f:ContentPanel ID="messagePanel" AutoScroll="true" Title="会话" BoxFlex="1" ShowBorder="true">
+                                <Tools>
+                                    <f:Tool IconFont="@IconFont.Refresh" Text="新建的会话" OnClick="btnRefresh_Click"></f:Tool>
+                                </Tools>
+                            </f:ContentPanel>
+                            <f:Form ShowHeader="false" ShowBorder="false">
+                                <Items>
+                                    <f:TextArea ID="txtInput" EmptyText="需求" AutoGrowHeight="true" AutoGrowHeightMax="200">
+                                    </f:TextArea>
+                                </Items>
+                                <Toolbars>
+                                    <f:Toolbar Position="@ToolbarPosition.Bottom" ToolbarAlign="@ToolbarAlign.Right">
+                                        <Items>
+                                            <f:Button Text="发送"
+                                                   OnClickDelegate="@(e =>
+                                                    {
+                                                        e.Action = Url.Handler("txtInput_Enter");
+                                                        e.AjaxLoadingType = AjaxLoadingType.Mask;
+                                                        e.ShowAjaxLoadingMaskText = true;
+                                                    })"></f:Button>
+                                        </Items>
+                                    </f:Toolbar>
+                                </Toolbars>
+                            </f:Form>
+                        </Items>
+                    </f:Panel>
+                </Items>
+            </f:Panel>
+            <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true">
+            </f:ContentPanel>
+        </Items>
+    </f:Panel>
+}
+
+@section script {
+    <script src="~/js/marked.min.js"></script>
+    <script src="~/js/highlight.min.js"></script>
+    <script src="~/js/highlightjs-line-numbers.min.js"></script>
+    <script src="~/js/mermaid.min.js"></script>
+    <script>
+        
+    </script>
+    <script src="~/js/marked-highlight.js"></script>
+    <script>
+        F.ready(() => {
+            $('#rightPanel_Content').addClass('mermaid');
+            mermaid.initialize({
+                startOnLoad: true,
+                securityLevel: 'loose',
+            });
+            var markedAPI = marked.use( {
+                renderer: {
+                     code(code, type, escaped) {
+                        if (type == "mermaid") {
+                            //document.getElementById('rightPanel_Content').innerHTML = code;
+                            mermaidAPI(code);
+                        }
+                        return `<pre><code class="hljs language-${type}" data-name="21">${code}</code></pre>`;
+                    }
+                }
+            });
+            const mermaidAPI = async (code)=> {
+                const { svg, bindFunctions } = await mermaid.render('mermaidSvg', code);
+                setTimeout(() => {
+                    document.querySelector(`#rightPanel_Content`).innerHTML = svg;
+                })
+            };
+            F.ui.codePanel.setText = function (msg) {
+
+                const htmlContent = markedAPI(msg);
+
+                document.getElementById('codePanel_Content').innerHTML = htmlContent;
+
+                hljs.initLineNumbersOnLoad({
+                    singleLine: true
+                });
+                F.ui.messagePanel.setText(F.ui.txtInput.getText())
+            }
+            F.ui.messagePanel.setText = function (msg) {
+                let msgdiv = $(`<div>${msg}</div>`);
+                msgdiv.addClass("history");
+                $(`#messagePanel_Content`).append(msgdiv)
+                F.ui.txtInput.setText(``);
+            }
+            F.ui.messagePanel.clear = function () {
+                $(`#messagePanel_Content`).html(``);
+            }
+        })
+    </script>
+}
