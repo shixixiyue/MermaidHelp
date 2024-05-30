@@ -15,12 +15,15 @@
             margin: 1rem;
             text-align: center;
         }
+
         pre {
             margin: 0px;
         }
+
         .hljs {
             background-color: unset;
         }
+
         .hljs-ln {
             padding-bottom: 1.2rem;
             margin: 0rem !important;
@@ -75,7 +78,7 @@
                                     <f:Toolbar Position="@ToolbarPosition.Bottom" ToolbarAlign="@ToolbarAlign.Right">
                                         <Items>
                                             <f:Button Text="发送"
-                                                   OnClickDelegate="@(e =>
+                                                      OnClickDelegate="@(e =>
                                                     {
                                                         e.Action = Url.Handler("txtInput_Enter");
                                                         e.AjaxLoadingType = AjaxLoadingType.Mask;
@@ -101,53 +104,63 @@
     <script src="~/js/highlightjs-line-numbers.min.js"></script>
     <script src="~/js/mermaid.min.js"></script>
     <script>
-        
-    </script>
-    <script src="~/js/marked-highlight.js"></script>
-    <script>
+        /**初始化 */
         F.ready(() => {
             $('#rightPanel_Content').addClass('mermaid');
             mermaid.initialize({
                 startOnLoad: true,
                 securityLevel: 'loose',
             });
-            var markedAPI = marked.use( {
-                renderer: {
-                     code(code, type, escaped) {
-                        if (type == "mermaid") {
-                            //document.getElementById('rightPanel_Content').innerHTML = code;
-                            mermaidAPI(code);
-                        }
-                        return `<pre><code class="hljs language-${type}" data-name="21">${code}</code></pre>`;
-                    }
-                }
-            });
-            const mermaidAPI = async (code)=> {
-                const { svg, bindFunctions } = await mermaid.render('mermaidSvg', code);
-                setTimeout(() => {
-                    document.querySelector(`#rightPanel_Content`).innerHTML = svg;
-                })
-            };
+        });
+    </script>
+    <script>
+        F.ready(() => {
             F.ui.codePanel.setText = function (msg) {
-
-                const htmlContent = markedAPI(msg);
+                //显示代码，并且显示视图
+                const htmlContent = markedAPI(msg, mermaidAPI);
 
                 document.getElementById('codePanel_Content').innerHTML = htmlContent;
 
+                //重绘行号
                 hljs.initLineNumbersOnLoad({
                     singleLine: true
                 });
+                //历史会话
                 F.ui.messagePanel.setText(F.ui.txtInput.getText())
             }
+            /**历史会话 */
             F.ui.messagePanel.setText = function (msg) {
                 let msgdiv = $(`<div>${msg}</div>`);
                 msgdiv.addClass("history");
                 $(`#messagePanel_Content`).append(msgdiv)
                 F.ui.txtInput.setText(``);
             }
+            /**清除 */
             F.ui.messagePanel.clear = function () {
                 $(`#messagePanel_Content`).html(``);
             }
-        })
+        });
+
+        /**显示代码 显示 mermaid*/
+        var markedAPI = (msg, mermaidfun) => {
+            let api = marked.use({
+                renderer: {
+                    code(code, type, escaped) {
+                        if (type == "mermaid") {
+                            mermaidfun(code);
+                        }
+                        return `<pre><code class="hljs language-${type}" data-name="21">${code}</code></pre>`;
+                    }
+                }
+            });
+            return api(msg)
+        }
+        /**显示视图 */
+        const mermaidAPI = async (code) => {
+            const { svg, bindFunctions } = await mermaid.render('mermaidSvg', code);
+            setTimeout(() => {
+                document.querySelector(`#rightPanel_Content`).innerHTML = svg;
+            })
+        };
     </script>
 }
