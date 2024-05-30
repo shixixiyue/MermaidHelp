@@ -96,6 +96,9 @@
                 </Items>
             </f:Panel>
             <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true">
+                <Tools>
+                    <f:Tool IconFont="@IconFont.Image" Text="导出图片" OnClientClick="saveToImg();"></f:Tool>
+                </Tools>
             </f:ContentPanel>
         </Items>
     </f:Panel>
@@ -106,6 +109,8 @@
     <script src="~/js/highlight.min.js"></script>
     <script src="~/js/highlightjs-line-numbers.min.js"></script>
     <script src="~/js/mermaid.min.js"></script>
+    <script src="~/js/pako.min.js"></script>
+    <script src="~/js/base64.min.js"></script>
     <script>
         /**初始化 */
         F.ready(() => {
@@ -161,6 +166,7 @@
         }
         /**显示视图 */
         const mermaidAPI = async (code) => {
+            F.ui.codePanel.mermaidText = code;
             const { svg, bindFunctions } = await mermaid.render('mermaidSvg', code);
             setTimeout(() => {
                 document.querySelector(`#rightPanel_Content`).innerHTML = svg;
@@ -172,5 +178,63 @@
             try { await copyToClipboard(F.ui.codePanel.codeText); }//成功
             catch (e) { }//失败
         }
+
+
+        function saveToImg() {
+            const pako = serialize(JSON.stringify({
+                "code": F.ui.codePanel.mermaidText,
+                "mermaid": {
+                    "theme": "default"
+                },
+                "autoSync": true,
+                "updateDiagram": true,
+                "editorMode": "code"
+            }));
+            const dataURL = `https://mermaid.ink/img/pako:${pako}?type=png`;
+
+            // 使用 fetch 获取图片数据并转换为 Blob 对象
+            fetch(dataURL)
+                .then(response => response.blob())
+                .then(blob => {
+                    // 创建一个临时的 <a> 元素
+                    const link = document.createElement('a');
+
+                    // 创建一个对象 URL
+                    const url = URL.createObjectURL(blob);
+
+                    // 设置下载文件的名称
+                    link.download = '导出图片.png';
+
+                    // 将 href 属性设置为对象 URL
+                    link.href = url;
+
+                    // 将 <a> 元素添加到 DOM 中（这是为了使其可点击）
+                    document.body.appendChild(link);
+
+                    // 触发点击事件，开始下载
+                    link.click();
+
+                    // 下载完成后，将 <a> 元素从 DOM 中移除
+                    document.body.removeChild(link);
+
+                    // 释放对象 URL
+                    URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('下载图片时出错:', error);
+                });
+        }
+        // 定义 serialize 和 deserialize 函数
+        function serialize(state) {
+            const data = new TextEncoder().encode(state);
+            const compressed = pako.deflate(data, { level: 9 });
+            return Base64.fromUint8Array(compressed, true);
+        }
+
+        function deserialize(state) {
+            const data = Base64.toUint8Array(state);
+            return pako.inflate(data, { to: 'string' });
+        }
+
     </script>
 }
