@@ -2,7 +2,7 @@
 
 输出需求调用GPTAPI生成`mermaid`格式的流程图；
 
-这里只作为工具，生成流程图，主要为了加入到
+这里只作为工具，生成流程图，主要为了加入到公司的项目管理运维管理，二开可以套数据库、接口等。所以功能有限，可以作为工具或代码示例。
 
 # 2. 技术栈
 
@@ -15,6 +15,9 @@
 `mermaid.min.js`|显示流程图
 `pako.min.js`<br/>`base64.min.js`|压缩加密
 `https://mermaid.ink/img` | 导出图片
+
+gpt返回`markdown`格式的代码；使用`marked.min.js`显示；`highlightjs`控制行号格式；同时触发`marked.renderer`，最后回调 `mermaid.render`；
+
 
 # 3. 配置
 
@@ -35,6 +38,7 @@
 # 4. 后续
 
 - [ ] Mermaid格式，目前写死了`flowchart LR`
+- [ ] 关联到 https://mermaid.live/
 - [ ] Docker 支持
 
 # 5. 图片
