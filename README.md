@@ -39,6 +39,7 @@ gpt返回`markdown`格式的代码；使用`marked.min.js`显示；`highlightjs`
 
 - [ ] Mermaid格式，目前写死了`flowchart LR`
 - [ ] 关联到 https://mermaid.live/
+- [ ] 增加代码可读性
 - [ ] Docker 支持
 
 # 5. 图片
