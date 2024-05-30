@@ -59,8 +59,11 @@
         <Items>
             <f:Panel ID="leftPanel" BoxFlex="2" NoBorderAndHeader Layout="@LayoutType.VBox" BodyPadding="5">
                 <Items>
-                    <f:ContentPanel Title="代码" ID="codePanel" BoxFlex="1" AutoScroll="true" EnableCollapse="true"
-                                    Expanded="true" Layout="@LayoutType.Fit" ShowBorder="true">
+                    <f:ContentPanel Title="返回的代码" ID="codePanel" BoxFlex="1" AutoScroll="true" EnableCollapse="true"
+                                    Expanded="true" Layout="@LayoutType.Fit" ShowBorder="true" CustomToolAhead="true">
+                        <Tools>
+                            <f:Tool IconFont="@IconFont.Copy" Text="复制(Markdown)" OnClientClick="btnCopy_Click();"></f:Tool>
+                        </Tools>
                     </f:ContentPanel>
                     <f:Panel ID="textPanel" BoxFlex="2" Expanded="true" Layout="@LayoutType.VBox" MarginTop="5">
                         <Items>
@@ -71,13 +74,13 @@
                             </f:ContentPanel>
                             <f:Form ShowHeader="false" ShowBorder="false">
                                 <Items>
-                                    <f:TextArea ID="txtInput" EmptyText="需求" AutoGrowHeight="true" AutoGrowHeightMax="200">
+                                    <f:TextArea ID="txtInput" EmptyText="请输入需求" AutoGrowHeight="true" AutoGrowHeightMax="200">
                                     </f:TextArea>
                                 </Items>
                                 <Toolbars>
                                     <f:Toolbar Position="@ToolbarPosition.Bottom" ToolbarAlign="@ToolbarAlign.Right">
                                         <Items>
-                                            <f:Button Text="发送"
+                                            <f:Button Text="发送" IconFont="@IconFont.Send"
                                                       OnClickDelegate="@(e =>
                                                     {
                                                         e.Action = Url.Handler("txtInput_Enter");
@@ -116,6 +119,7 @@
     <script>
         F.ready(() => {
             F.ui.codePanel.setText = function (msg) {
+                F.ui.codePanel.codeText = msg;
                 //显示代码，并且显示视图
                 const htmlContent = markedAPI(msg, mermaidAPI);
 
@@ -162,5 +166,11 @@
                 document.querySelector(`#rightPanel_Content`).innerHTML = svg;
             })
         };
+
+        /**复制 */
+        async function btnCopy_Click() {
+            try { await copyToClipboard(F.ui.codePanel.codeText); }//成功
+            catch (e) { }//失败
+        }
     </script>
 }
