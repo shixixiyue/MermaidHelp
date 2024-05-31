@@ -7,6 +7,9 @@ namespace MyFineUIEx
     [RestrictChildrenAttribute("Items", "Content", "Tools", "Toolbars", "Listeners", "Attributes", "IFrameAttributes")]
     public class MyPanelTagHelperEx : PanelTagHelperEx
     {
+        /// <summary>
+        /// 不显示边框和头
+        /// </summary>
         [HtmlAttributeName("NoBorderAndHeader")]
         public bool NoBorderAndHeader { set; get; } = true;
 

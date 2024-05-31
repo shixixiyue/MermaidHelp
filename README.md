@@ -83,7 +83,7 @@ docker build -t mermaidhelp .
 
 [GPT_API_free](https://gitcode.com/chatanywhere/GPT_API_free/overview?tab=readme-ov-file&utm_source=csdn_github_accelerator&isLogin=1)
 
-# 7. 忍不住打赏
+# 7. 结善缘
 
 ![](images/04.png) 
 
