@@ -34,13 +34,40 @@ gpt返回`markdown`格式的代码；使用`marked.min.js`显示；`highlightjs`
 ***
 `MermaidMask.cs` 角色面具，目前写死了`flowchart LR`
 
+## 3.1 Docker部署
+
+docker-compose.yml
+
+```
+services:
+  mermaidhelp:
+    restart: unless-stopped
+    image: 935732994/mermaidhelp
+    #注意80是内部端口
+    ports:
+      - 8001:80
+    #这里填写API配置
+    environment:
+      - MODEL=gpt-4o
+      - URL=
+      - KEY=
+```
+## 3.2 本地编译
+
+需要安装 .net8 环境，我的使用的VS2022开发；
+
+可以在根目录下打包：
+```
+docker build -t mermaidhelp .
+```
+
 ---
 # 4. 后续
 
 - [ ] Mermaid格式，目前写死了`flowchart LR`
-- [ ] 关联到 https://mermaid.live/
-- [ ] 增加代码可读性
-- [ ] Docker 支持
+- [-] 关联到 https://mermaid.live/
+- [-] 增加代码可读性
+- [-] Docker 支持
 
 # 5. 图片
 ![](images/01.png)
