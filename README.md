@@ -23,6 +23,8 @@ gpt返回`markdown`格式的代码；使用`marked.min.js`显示；`highlightjs`
 
 [GPTAPI](https://gitcode.com/chatanywhere/GPT_API_free/overview?tab=readme-ov-file&utm_source=csdn_github_accelerator&isLogin=1)配置 `helpconfig.json` 文件，注意不要有注释
 
+[GPT_API_free](https://gitcode.com/chatanywhere/GPT_API_free/overview?tab=readme-ov-file&utm_source=csdn_github_accelerator&isLogin=1) 提供的免费API，目前支持`gpt-4o`、`gpt-3.5-turbo`、`gpt-3.5-turbo-16k`
+
 ```
 {
   "model": "gpt-4o",//模型
