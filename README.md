@@ -9,7 +9,7 @@
 环境|说明
 -|-
 `.Net8.0` | 后端
-`FineUI11`|前端 + 后端
+[FineUI11](https://fineui.com/fans/)|前端 + 后端
 `marked.min.js`|显示`markdown`
 `highlightjs-line-numbers.min.js`|显示 行号
 `mermaid.min.js`|显示流程图

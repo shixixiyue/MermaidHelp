@@ -9,3 +9,4 @@ global using System.Threading.Tasks;
 global using Newtonsoft.Json.Linq;
 global using NuGet.Protocol;
 global using System.Net.Http.Headers;
+global using MermaidHelp.Code;

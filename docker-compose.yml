@@ -1,0 +1,16 @@
+services:
+  mermaidhelp:
+    # 镜像名称
+    image: 935732994/mermaidhelp
+    # 容器名称
+    container_name: mermaidhelp  
+    # 自启动
+    restart: unless-stopped
+    # 端口设置
+    ports:
+      - 8080:80
+    # 环境变量
+    environment:
+      MODEL: "gpt-4o"
+      URL: ""
+      KEY: ""

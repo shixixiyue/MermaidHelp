@@ -20,7 +20,10 @@ namespace MermaidHelp
                 HelpConfig ms = new();
                 config.Bind(ms);
                 Projects = ms;
+                //输出
+                Console.WriteLine(Projects.ToJson());
             });
+            Console.WriteLine(Projects.ToJson());
             return services;
         }
 

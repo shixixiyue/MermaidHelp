@@ -1,16 +1,3 @@
-using FineUICore;
-using MermaidHelp.Code;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.SignalR.Protocol;
-using Newtonsoft.Json.Linq;
-using ShimSkiaSharp;
-using SkiaSharp;
-using Svg.Skia;
-using System.Threading.Tasks;
-
 namespace MermaidHelp.Pages
 {
     public partial class IndexModel : BaseModel
@@ -58,6 +45,5 @@ namespace MermaidHelp.Pages
 
             return output;
         }
-
     }
 }

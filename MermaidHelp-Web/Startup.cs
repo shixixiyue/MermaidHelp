@@ -13,6 +13,7 @@ namespace MermaidHelp
             helpconfig = new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile("helpconfig.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"helpconfig.Development.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
                 .Build();
 
             Configuration = configuration;

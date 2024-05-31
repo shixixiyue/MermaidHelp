@@ -6,11 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="13.8.0" />
-    <PackageReference Include="Svg.Skia" Version="2.0.0-beta1" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FineUIEx\FineUIEx.csproj" />
   </ItemGroup>
