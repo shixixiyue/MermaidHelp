@@ -4,6 +4,13 @@
 
 这里只作为工具，生成流程图，主要为了加入到公司的项目管理运维管理，二开可以套数据库、接口等。所以功能有限，可以作为工具或代码示例。
 
+在线体验
+
+https://mermaid.shizhuoran.top/
+
+使用的是 GPT_API_free gpt-3.5-turbo模型，可能不稳定，每天100次
+
+
 # 2. 技术栈
 
 环境|说明
@@ -28,7 +35,7 @@ gpt返回`markdown`格式的代码；使用`marked.min.js`显示；`highlightjs`
 ```
 {
   "model": "gpt-4o",//模型
-  "url": "",//代理地址
+  "url": "https://api.chatanywhere.tech/v1/chat/completions",//代理地址
   "key": ""//APIKEY
 }
 ```

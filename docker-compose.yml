@@ -6,5 +6,5 @@ services:
       - 8001:80
     environment:
       - MODEL=gpt-4o
-      - URL=
+      - URL=https://api.chatanywhere.tech/v1/chat/completions
       - KEY=
