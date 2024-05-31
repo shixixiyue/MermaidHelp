@@ -96,8 +96,9 @@
                     </f:Panel>
                 </Items>
             </f:Panel>
-            <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true">
+            <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true" AutoScroll="true">
                 <Tools>
+                    <f:Tool ID="toolMax" IconFont="@IconFont.FileO" Text="最大化" OnClientClick="btnMaxView_Click();"></f:Tool>
                     <f:Tool IconFont="@IconFont.Image" Text="导出图片" OnClientClick="btnSaveToImg_Click();"></f:Tool>
                 </Tools>
             </f:ContentPanel>

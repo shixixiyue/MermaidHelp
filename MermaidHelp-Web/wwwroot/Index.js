@@ -68,6 +68,10 @@ function btnSaveToImg_Click() {
         })
         .catch(error => console.error('下载图片时出错:', error));
 }
+
+function btnMaxView_Click() {
+    F.ui.rightPanel.maxView = !F.ui.rightPanel.maxView;
+}
 //#endregion 页面事件
 
 //#region 私有方法
@@ -118,4 +122,27 @@ function deserialize(state) {
     return pako.inflate(data, { to: 'string' });
 }
 
+F.ready(() => {
+    F.ui.rightPanel.__maxView = false;
+    Object.defineProperty(F.ui.rightPanel, "maxView", {
+        /**
+         * @param {boolean} val
+         */
+        set(val) {
+            if (val) {
+                F.ui.toolMax.setText("恢复");
+                F.ui.leftPanel.hide();
+            } else {
+                F.ui.toolMax.setText("最大化");
+                F.ui.leftPanel.show();
+            }
+            F.ui.leftPanel.doLayout();
+            F.ui.rightPanel.doLayout();
+            this.__maxView = val;
+        },
+        get() {
+            return this.__maxView;
+        }
+    });
+})
 //#endregion 私有方法
