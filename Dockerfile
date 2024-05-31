@@ -23,7 +23,7 @@ COPY --from=build-env /app/out .
 
 # 设置环境变量
 ENV MODEL=gpt-4o
-ENV URL=
+ENV URL=https://api.chatanywhere.tech/v1/chat/completions
 ENV KEY=
 
 # 暴露端口

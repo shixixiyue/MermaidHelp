@@ -1,7 +1,6 @@
 ﻿
 //初始化
 F.ready(() => {
-
     $('#rightPanel_Content').addClass('mermaid');
 
     mermaid.initialize({
@@ -31,9 +30,7 @@ F.ready(() => {
     F.ui.messagePanel.clear = function () {
         $(`#messagePanel_Content`).html(``);
     };
-
 });
-
 
 //#region 页面事件
 // 复制代码到剪贴板
@@ -76,7 +73,6 @@ function btnMaxView_Click() {
 
 //#region 私有方法
 
-
 // 显示代码和 Mermaid 图表
 const markedAPI = (msg, mermaidfun) => {
     return marked.use({
@@ -91,12 +87,22 @@ const markedAPI = (msg, mermaidfun) => {
 
 // 渲染 Mermaid 图表
 const mermaidAPI = async (code) => {
-    F.ui.codePanel.mermaidText = code;
-    F.ui.codePanel.mermaidPako = GetPako(code);
-    const { svg } = await mermaid.render('mermaidSvg', code);
-    setTimeout(() => {
-        document.querySelector(`#rightPanel_Content`).innerHTML = svg;
-    });
+    F.ui.rightPanel.parse = true;
+    try {
+        F.ui.rightPanel.parse = await mermaid.parse(code);
+    }
+    catch (e) {
+        F.ui.rightPanel.parse = e;
+    }
+    if (F.ui.rightPanel.parse===true) {
+        F.ui.codePanel.mermaidText = code;
+        F.ui.codePanel.mermaidPako = GetPako(code);
+        const { svg } = await mermaid.render('mermaidSvg', code);
+        setTimeout(() => {
+            document.querySelector(`#rightPanel_Content`).innerHTML = svg;
+        });
+    }
+   
 };
 
 // 获取 Pako 压缩的代码
@@ -143,6 +149,30 @@ F.ready(() => {
         get() {
             return this.__maxView;
         }
+    });
+
+    F.ui.rightPanel.__parse = true;
+    Object.defineProperty(F.ui.rightPanel, "parse", {
+        /**
+         * @param {boolean} val
+         */
+        set(val) {
+            if (val === true) {
+                $(`.errordiv`).hide().remove();
+            } else {
+                let errordiv = $(`<div class="errordiv"></div>`);
+                errordiv.html("语法错误：<br/>"+val);
+                $(`#rightPanel_Content`).append(errordiv);
+            }
+            this.__parse = val;
+        },
+        get() {
+            return this.__parse;
+        }
+    });
+
+    setTimeout(() => {
+        $(`#dmermaidSvg`).remove();
     });
 })
 //#endregion 私有方法
