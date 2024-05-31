@@ -65,9 +65,10 @@ docker build -t mermaidhelp .
 # 4. 后续
 
 - [ ] Mermaid格式，目前写死了`flowchart LR`
-- [-] 关联到 https://mermaid.live/
-- [-] 增加代码可读性
-- [-] Docker 支持
+- [ ] 历史的视图 
+- [-] 关联到 https://mermaid.live/ | 2024年5月30日
+- [-] 增加代码可读性  |  2024年5月30日
+- [-] Docker 支持 |  2024年5月30日
 
 # 5. 图片
 ![](images/01.png)
