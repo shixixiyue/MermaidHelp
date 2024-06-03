@@ -82,9 +82,11 @@ docker build -t mermaidhelp .
 - ~~Docker 支持~~ |  2024年5月30日
 
 # 5. 图片
-![](images/01.png)
-![](images/02.gif)
-![](images/03.gif)
+![](https://blog.shizhuoran.top/static/img/508af01e03614acbe3667ba38cdd4698.å¢å åè½.gif)
+
+![](https://blog.shizhuoran.top/static/img/854c71027941d915f2cf9c3fcdda7955.ç»å¾å·¥å·.gif)
+
+![](https://blog.shizhuoran.top/static/img/7126264885bfb8335962172696d8f865.ç»å¾å·¥å·2.gif.gif)
 
 # 6. 链接
 
@@ -94,6 +96,7 @@ docker build -t mermaidhelp .
 
 # 7. 结善缘
 
-![](images/04.png) 
+
+![](https://blog.shizhuoran.top/static/img/18c9e1719a9419ba2b2abb07f5e286ae.weixin20.webp)
 
  
