@@ -1,0 +1,522 @@
+
+/*
+    Main color: #466596
+    Border color: #9BACC6
+*/
+
+
+/* Content */
+.f-widget-content {
+    border-color: #ddd;
+    background-color: #fff;
+    color: #444;
+}
+
+.f-widget-content a {
+    color: #444;
+}
+
+/* Header */
+.f-widget-header {
+    border-color: #ddd;
+    background-color: #e6e6e6;
+    color: #444;
+}
+
+.f-widget-header a {
+    color: #444;
+}
+
+/* States */
+.f-state-default,
+.f-widget-content .f-state-default,
+.f-widget-header .f-state-default {
+    border-color: #ddd;
+    background-color: #ffffff;
+    color: #444;
+}
+
+.f-state-default a,
+.f-state-default a:link,
+.f-state-default a:visited {
+    color: #444;
+}
+
+.f-state-hover,
+.f-widget-content .f-state-hover,
+.f-widget-header .f-state-hover,
+.f-state-focus,
+.f-widget-content .f-state-focus,
+.f-widget-header .f-state-focus {
+    border-color: #9BACC6;
+    background-color: #fafafa;
+    color: #466596;
+}
+
+.f-state-hover a,
+.f-state-hover a:hover,
+.f-state-hover a:link,
+.f-state-hover a:visited,
+.f-state-focus a,
+.f-state-focus a:hover,
+.f-state-focus a:link,
+.f-state-focus a:visited {
+    color: #466596;
+}
+
+.f-state-active,
+.f-widget-content .f-state-active,
+.f-widget-header .f-state-active {
+    border-color: #9BACC6;
+    background-color: #e6e6e6;
+    color: #466596;
+}
+
+.f-state-active a,
+.f-state-active a:link,
+.f-state-active a:visited {
+    color: #466596;
+}
+
+
+
+.f-state-error,
+.f-widget-content .f-state-error,
+.f-widget-header .f-state-error {
+    border-color: #ffa8a8;
+    background-color: #fff8f8;
+    color: #000;
+}
+
+.f-state-error a,
+.f-widget-content .f-state-error a,
+.f-widget-header .f-state-error a {
+}
+
+.f-state-error-text,
+.f-widget-content .f-state-error-text,
+.f-widget-header .f-state-error-text {
+    color: #000;
+}
+
+.f-state-disabled,
+.f-widget-content .f-state-disabled,
+.f-widget-header .f-state-disabled {
+    opacity: .5;
+    filter: alpha(opacity=50);
+    background-image: none;
+}
+
+.f-state-disabled .f-icon {
+    filter: alpha(opacity=50);
+}
+
+/* Icon font */
+.f-icon,
+.f-widget-content .f-icon {
+    color: #888;
+}
+
+.f-widget-header .f-icon {
+    color: #888;
+}
+
+.f-state-default .f-icon {
+    color: #888;
+}
+
+.f-state-hover .f-icon,
+.f-state-focus .f-icon {
+    color: #466596;
+}
+
+.f-state-active .f-icon {
+    color: #466596;
+}
+
+
+
+.f-state-error .f-icon,
+.f-state-error-text .f-icon {
+    color: #ff6c6c;
+}
+
+
+/* Round corner */
+.f-corner-all,
+.f-corner-top,
+.f-corner-left,
+.f-corner-tl {
+    border-top-left-radius: 6px;
+}
+
+.f-corner-all,
+.f-corner-top,
+.f-corner-right,
+.f-corner-tr {
+    border-top-right-radius: 6px;
+}
+
+.f-corner-all,
+.f-corner-bottom,
+.f-corner-left,
+.f-corner-bl {
+    border-bottom-left-radius: 6px;
+}
+
+.f-corner-all,
+.f-corner-bottom,
+.f-corner-right,
+.f-corner-br {
+    border-bottom-right-radius: 6px;
+}
+
+
+/* CheckBox - RadioButton */
+.f-checkbox.f-checked,
+.f-checkbox.f-checkbox-indeterminate {
+    background-color: #466596;
+    border-color: #466596;
+}
+.f-radiobutton:after {
+    background-color: #466596;
+}
+.f-radiobutton.f-checked {
+    border-color: #466596;
+}
+
+.f-state-focus.f-checkbox,
+.f-state-focus.f-radiobutton {
+    border-color: #6e98da;
+}
+.f-state-focus.f-checkbox.f-checked {
+    border-color: #6e98da;
+    background-color: #6e98da;
+}
+.f-state-focus.f-radiobutton.f-checked {
+    border-color: #6e98da;
+}
+.f-state-focus.f-radiobutton.f-checked:after {
+    background-color: #6e98da;
+}
+
+.f-menu-item-icon.f-menu-radiobutton.f-checked {
+	color: #466596;
+}
+
+
+
+
+.f-field-checkbox-switch.f-checked {
+    background-color: #466596;
+    border-color: #466596;
+}
+.f-state-focus.f-field-checkbox-switch.f-checked {
+    background-color: #6e98da;
+    border-color: #6e98da;
+}
+.f-state-focus.f-field-checkbox-switch {
+    background-color: #bbb;
+    border-color: #bbb;
+}
+
+
+
+
+/* Special - header active state */
+.f-widget-header .f-state-active {
+    background-color: #fff;
+}
+
+/* Special - Remove border-color for hover state */
+.f-tab-header.f-state-hover {
+    border-color: #fafafa;
+}
+.f-tab-header.f-state-active {
+    border-color: #ddd;
+}
+
+
+
+/* Special - Grid */
+/*.f-grid-headerct .f-grid-colheader {
+	border-right-color: transparent;
+}
+.f-grid-headerct.f-grid-headerct-hover .f-grid-colheader {
+	border-right-color: #ddd;
+}
+.f-grid-headerct .f-grid-colheader {
+	border-right-color: #ddd;
+}*/
+
+
+/* Special - TabStrip */
+.f-tabstrip-plain > .f-panel-bodyct > .f-panel-body,
+.f-tabstrip-plain > .f-panel-header,
+.f-tabstrip-plain > .f-panel-header .f-panel-tools,
+.f-tabstrip-bordercolor .f-tab-header {
+    border-color: #ddd;
+}
+
+.f-tabstrip-plain > .f-panel-bodyct > .f-toolbar {
+    border-left-color: #ddd;
+    border-right-color: #ddd;
+}
+
+.f-tabstrip-plain.f-tabstrip-header-top > .f-panel-header .f-tabstrip-scroller,
+.f-tabstrip-plain.f-tabstrip-header-right > .f-panel-header .f-tabstrip-scroller {
+    border-bottom-color: #ddd;
+}
+
+.f-tabstrip-plain.f-tabstrip-header-bottom > .f-panel-header .f-tabstrip-scroller,
+.f-tabstrip-plain.f-tabstrip-header-left > .f-panel-header .f-tabstrip-scroller {
+    border-top-color: #ddd;
+}
+
+.f-tab-header.f-state-active {
+    background-color: #fff;
+}
+
+
+.f-tabstrip-header .f-tab-header.f-state-active:after {
+	background-color: #f3f3f3;
+}
+.f-tab-header.f-state-active .f-icon {
+	color: #466596;
+}
+
+.f-tabstrip-header .f-tabstrip-header-inkbar {
+	background-color: #466596;
+}
+.f-tabstrip-inkbar > .f-panel-header .f-tab-header.f-state-active {
+	/*background-color: #f3f3f3;*/
+}
+
+/* v8.1.0 - tabSeparated header has a bottom border */
+.f-tabstrip-separated > .f-panel-header {
+	border-color: #fff;
+}
+.f-tabstrip-separated > .f-panel-header .f-tab-header.f-state-active {
+	border-color: #fff;
+}
+
+
+
+/* Special - Grid selected cell */
+/*.f-grid-selectedcell-border {
+    border-color: #ddd !important;
+}*/
+
+
+
+/* Special - Grid selected row */
+.f-grid-row.f-state-active {
+    background-color: #DBE6F5;
+    color: #444;
+}
+
+.f-grid-row.f-state-active a,
+.f-grid-row.f-state-active a:link,
+.f-grid-row.f-state-active a:visited {
+    color: #444;
+}
+
+.f-grid-row.f-state-active .f-icon {
+    color: #466596;
+}
+
+/* Special - Tree header style */
+/*.f-tree-headerstyle .f-panel-body {
+    background-color: #EBEBEB;
+}
+
+.f-tree-headerstyle .f-tree-node.f-tree-node-toplevel .f-tree-cell-inner,
+.f-tree-minimode-item-inner {
+    border-color: #ddd;
+}*/
+
+.f-toolbar-buttonplain,
+.f-toolbar-buttonplain .f-buttongroup .f-btn:after {
+    border-color: #ddd !important;
+}
+
+
+/* Special - Button pressed state */
+.f-btn.f-state-active {
+    background-color: #466596;
+    color: #fff;
+}
+
+.f-btn.f-state-active .f-icon {
+    color: #fff;
+}
+
+
+/* Special - Main header */
+.f-mainheader {
+}
+.f-mainheader a,
+.f-mainheader .f-icon {
+}
+.f-widget-header.f-subheader {
+    
+}
+
+
+
+
+/* Special - MessageBoxIcon */
+.f-messagebox-icon.f-messageicon-information,
+.f-messagebox-icon.f-messageicon-question {
+    color: #466596;
+}
+
+
+/*.f-bgcolor,
+body.f-bgcolor {
+    background-color: #f3f3f3;
+}*/
+
+.f-grid-row.f-grid-row-newadded > .f-grid-cell:first-child > .f-grid-cell-inner:after {
+	color: #466596;
+}
+
+
+
+.f-grid-show-selected-cell .f-grid-cell-selected {
+    background-color: #d1d6e5;
+    color: #444;
+}
+.f-grid-show-selected-cell .f-grid-cell-selected .f-icon {
+	color: #466596;
+}
+
+
+/*.mainpanel .sidebarregion .leftregion,
+.mainpanel .bodyregion .centerregion {
+    border-width: 0;
+    border-top-width: 1px;
+    border-color: #ddd;
+}*/
+
+.mainpanel .bodyregion .centerregion .f-tabstrip-header {
+    /*border-width: 0;*/
+}
+
+
+.f-progressbar .f-progressbar-value {
+	background-color: #466596;
+}
+.f-progressbar-outer.f-progressbar-text-inside .f-progressbar-text {
+	color: #fff;
+}
+
+
+.f-rate-star-half .f-rate-star-first .f-rate-star-icon,
+.f-rate-star-full .f-rate-star-first .f-rate-star-icon,
+.f-rate-star-full .f-rate-star-second .f-rate-star-icon {
+	color: #466596;
+}
+
+
+
+
+
+
+
+
+
+
+/* Special - leftregion and centerregion for index page */
+.mainpanel {
+    background-color: #e6e6e6;
+}
+.mainpanel .f-mainheader {
+    border-bottom: none;
+}
+.mainpanel .sidebarregion {
+    box-shadow: none;
+}
+.mainpanel .leftregion {
+    border-width: 0;
+    margin-right: 5px;
+}
+/* Default value: 20 + 10 + 10 */
+.mainpanel .leftregion .f-tree-node .f-tree-cell-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+/* Default value: 16 + 8 + 8 */
+.f-compactmode .mainpanel .leftregion .f-tree-node .f-tree-cell-inner {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+/* Default value: 16 + 10 + 10 */
+.f-smallmode .mainpanel .leftregion .f-tree-node .f-tree-cell-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+/* Default value: 24 + 12 + 12 */
+.f-largemode .mainpanel .leftregion .f-tree-node .f-tree-cell-inner,
+.f-largespacemode .mainpanel .leftregion .f-tree-node .f-tree-cell-inner {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+.mainpanel .leftregion .f-tree-node.f-state-hover,
+.mainpanel .leftregion .f-tree-node.f-state-active {
+    background-color: transparent;
+    background-image: none;
+}
+.mainpanel .leftregion .f-tree-node.f-state-hover .f-tree-cell-inner {
+    background-color: #fafafa;
+}
+.mainpanel .leftregion .f-tree-node.f-state-active .f-tree-cell-inner {
+    background-color: #ffffff;
+}
+
+
+.mainpanel .centerregion {
+    border-width: 0;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    margin-right: 16px;
+    background-color: transparent;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 6px 0px;
+}
+.mainpanel .centerregion > .f-panel-header {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+}
+.mainpanel .centerregion > .f-panel-header .f-tabstrip-header-inkbar {
+    /*background-color: rgba(255, 255, 255, 0.5);
+    bottom: 1px;*/
+}
+/* Default value: 20 + 10 + 10 */
+.mainpanel .centerregion > .f-panel-header .f-tab-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+/* Default value: 16 + 8 + 8 */
+.f-compactmode .mainpanel .centerregion > .f-panel-header .f-tab-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+/* Default value: 16 + 10 + 10 */
+.f-smallmode .mainpanel .centerregion > .f-panel-header .f-tab-header {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+/* Default value: 24 + 12 + 12 */
+.f-largemode .mainpanel .centerregion > .f-panel-header .f-tab-header,
+.f-largespacemode .mainpanel .centerregion > .f-panel-header .f-tab-header {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}

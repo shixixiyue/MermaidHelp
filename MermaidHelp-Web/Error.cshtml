@@ -1,0 +1,27 @@
+﻿@page
+@model MermaidHelp.ErrorModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.ErrorMessage</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+
+    <h1 class="text-danger">@ViewBag.ErrorMessage</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+
+    @if (!String.IsNullOrEmpty(ViewBag.RequestId))
+    {
+        <p>
+            <span>Request ID:</span> <code>@ViewBag.RequestId</code>
+        </p>
+    }
+</body>
+</html>
+

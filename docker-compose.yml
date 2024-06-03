@@ -1,0 +1,10 @@
+services:
+  mermaidhelp:
+    restart: unless-stopped
+    image: 935732994/mermaidhelp
+    ports:
+      - 8001:80
+    environment:
+      - MODEL=gpt-4o
+      - URL=https://api.chatanywhere.tech/v1/chat/completions
+      - KEY=

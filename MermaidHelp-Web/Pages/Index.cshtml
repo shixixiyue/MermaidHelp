@@ -1,0 +1,145 @@
+﻿@page
+@model MermaidHelp.Pages.IndexModel
+@{
+    ViewBag.Title = "";
+    var F = Html.F();
+}
+
+@functions {
+}
+@section head{
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+    <style>
+        #rightPanel_Content {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        pre {
+            margin: 0px;
+        }
+
+        .hljs {
+            background-color: unset;
+        }
+
+        .hljs-ln {
+            padding-bottom: 1.2rem;
+            margin: 0rem !important;
+        }
+
+        .hljs-ln td {
+            border: none !important;
+            padding: 2px 6px !important;
+            line-height: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .hljs-ln tr td:first-child {
+            color: cadetblue;
+            border-right: 1px solid !important;
+        }
+
+        .hljs-ln tr {
+            border: none !important;
+        }
+
+        .history {
+            margin: 1rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: #eee;
+        }
+
+        .history.active {
+            border-width: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1)
+        }
+
+        .errordiv {
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            position: absolute;
+            z-index: 999;
+            padding: 5px;
+            background: rgba(221, 221, 221, 0.8);
+            border-radius: 4px;
+            top: 1rem;
+        }
+    </style>
+}
+@section body {
+    <f:Panel ID="mainPanel" IsViewPort="true" NoBorderAndHeader Layout="@LayoutType.HBox" BodyPadding="5">
+        <Items>
+            <f:Panel ID="leftPanel" BoxFlex="2" NoBorderAndHeader Layout="@LayoutType.VBox" BodyPadding="5">
+                <Items>
+                    <f:ContentPanel Title="返回的代码" ID="codePanel" BoxFlex="1" AutoScroll="true" EnableCollapse="true"
+                                    Expanded="true" Layout="@LayoutType.Fit" ShowBorder="true" CustomToolAhead="true">
+                        <Tools>
+                            <f:Tool IconFont="@IconFont._Edit" Text="到Mermaid编辑" OnClientClick="btnOpenMermaid_Click();"></f:Tool>
+                            <f:Tool IconFont="@IconFont.Copy" Text="复制(Markdown)" OnClientClick="btnCopy_Click();"></f:Tool>
+                        </Tools>
+                    </f:ContentPanel>
+                    <f:Panel ID="textPanel" BoxFlex="2" Expanded="true" Layout="@LayoutType.VBox" MarginTop="5">
+                        <Items>
+                            <f:ContentPanel ID="messagePanel" AutoScroll="true" Title="会话" BoxFlex="1" ShowBorder="true">
+                                <Tools>
+                                    <f:Tool IconFont="@IconFont.Refresh" Text="新建的会话" OnClick="btnRefresh_Click"></f:Tool>
+                                </Tools>
+                            </f:ContentPanel>
+                            <f:Form ShowHeader="false" ShowBorder="false">
+                                <Items>
+                                    <f:TextArea ID="txtInput" EmptyText="请输入需求" AutoGrowHeight="true" AutoGrowHeightMax="200">
+                                    </f:TextArea>
+                                </Items>
+                                <Toolbars>
+                                    <f:Toolbar Position="@ToolbarPosition.Bottom" ToolbarAlign="@ToolbarAlign.Right">
+                                        <Items>
+                                            <f:Button Text="发送" IconFont="@IconFont.Send"
+                                                      OnClickDelegate="@(e =>
+                                                    {
+                                                        e.Action = Url.Handler("txtInput_Enter");
+                                                        e.AjaxLoadingType = AjaxLoadingType.Mask;
+                                                        e.ShowAjaxLoadingMaskText = true;
+                                                    })"></f:Button>
+                                        </Items>
+                                    </f:Toolbar>
+                                </Toolbars>
+                            </f:Form>
+                        </Items>
+                    </f:Panel>
+                </Items>
+            </f:Panel>
+            <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true" AutoScroll="true">
+                <Tools>
+                    <f:Tool ID="btnUp" Text="上一页" IconFont="@IconFont._Left" OnClientClick="btnPageChange('up');"></f:Tool>
+                    <f:Tool ID="btnDown" Text="下一页" IconFont="@IconFont._Right" IconAlign="@IconAlign.Right" OnClientClick="btnPageChange('down');"></f:Tool>
+                    <f:ToolbarSeparator></f:ToolbarSeparator>
+                    <f:Tool ID="btnBack" Text="退回到此" IconFont="@IconFont._Back" OnClientClick="btnPageChange('back');"></f:Tool>
+                    <f:ToolbarSeparator></f:ToolbarSeparator>
+                    <f:Tool ID="toolMax" IconFont="@IconFont.FileO" Text="最大化" OnClientClick="btnMaxView_Click();"></f:Tool>
+                    <f:Tool IconFont="@IconFont.Image" Text="导出图片">
+                        <Menu>
+                            <f:MenuButton Text="JPG" OnClientClick="btnSaveToImg_Click('jpeg');"></f:MenuButton>
+                            <f:MenuButton Text="PNG" OnClientClick="btnSaveToImg_Click('png');"></f:MenuButton>
+                            <f:MenuButton HideOnClick="false" ID="btnscale" Text="放大2倍" OnClientClick="btnscale_Click();"></f:MenuButton>
+                        </Menu>
+                    </f:Tool>
+                </Tools>
+            </f:ContentPanel>
+        </Items>
+    </f:Panel>
+}
+
+@section script {
+    <script src="~/js/marked.min.js"></script>
+    <script src="~/js/highlight.min.js"></script>
+    <script src="~/js/highlightjs-line-numbers.min.js"></script>
+    <script src="~/js/mermaid.min.js"></script>
+    <script src="~/js/pako.min.js"></script>
+    <script src="~/js/base64.min.js"></script>
+    <script src="~/Index.js"></script>
+}
