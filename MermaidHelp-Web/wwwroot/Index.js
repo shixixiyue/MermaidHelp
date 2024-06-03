@@ -54,7 +54,8 @@ function btnOpenMermaid_Click() {
 function btnSaveToImg_Click(type = 'jpeg') {
     let width = $('#mermaidSvg').width();
     let scale = F.ui.btnscale.scale || 2;
-    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}&scale=${scale}`;
+    width = width * scale;
+    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}`;
 
     fetch(dataURL)
         .then(response => response.blob())
@@ -81,7 +82,7 @@ function btnscale_Click() {
 }
 
 /**
- * 
+ *
  * @param {up,down,back} type
  */
 function btnPageChange(type) {
@@ -99,7 +100,7 @@ function btnPageChange(type) {
                 eventArgument: 'click',
                 url: '?handler=btnBack_Click',
                 params: {
-                    page: F.ui.messagePanel.pageIndex -1
+                    page: F.ui.messagePanel.pageIndex - 1
                 }
             });
             $('.history.active').nextAll('.history').remove();
@@ -213,7 +214,7 @@ F.ready(() => {
     });
     setBntEnable();
 
-    F.ui.messagePanel.on("change", (e,index) => {
+    F.ui.messagePanel.on("change", (e, index) => {
         F.ui.messagePanel.pageIndex = index;
         setBntEnable();
         $('.history').eq(index - 1).addClass("active").siblings().removeClass("active");
@@ -223,7 +224,6 @@ F.ready(() => {
         const htmlContent = markedAPI(msg, mermaidAPI);
         document.getElementById('codePanel_Content').innerHTML = htmlContent;
         hljs.initLineNumbersOnLoad({ singleLine: true });
-        
     });
 })
 //#endregion 私有方法
@@ -231,14 +231,13 @@ F.ready(() => {
 //#region 翻页
 
 function setBntEnable() {
-
     if ($('.history').length <= 1) {
         F.ui.btnUp.setEnabled(false);
         F.ui.btnDown.setEnabled(false);
         F.ui.btnBack.setEnabled(false);
         return;
     }
-    console.log('F.ui.messagePanel.pageIndex >', F.ui.messagePanel.pageIndex );
+    console.log('F.ui.messagePanel.pageIndex >', F.ui.messagePanel.pageIndex);
     //判断当前的编号是否是最后一个
     let pageindex = GetPageIndex();
 
