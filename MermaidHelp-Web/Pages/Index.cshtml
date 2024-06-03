@@ -116,15 +116,16 @@
             <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true" AutoScroll="true">
                 <Tools>
                     <f:Tool ID="btnUp" Text="上一页" IconFont="@IconFont._Left" OnClientClick="btnPageChange('up');"></f:Tool>
-                    <f:Tool  ID="btnDown" Text="下一页" IconFont="@IconFont._Right" IconAlign="@IconAlign.Right" OnClientClick="btnPageChange('down');"></f:Tool>
+                    <f:Tool ID="btnDown" Text="下一页" IconFont="@IconFont._Right" IconAlign="@IconAlign.Right" OnClientClick="btnPageChange('down');"></f:Tool>
                     <f:ToolbarSeparator></f:ToolbarSeparator>
-                    <f:Tool  ID="btnBack" Text="退回到此" IconFont="@IconFont._Back" OnClientClick="btnPageChange('back');"></f:Tool>
+                    <f:Tool ID="btnBack" Text="退回到此" IconFont="@IconFont._Back" OnClientClick="btnPageChange('back');"></f:Tool>
                     <f:ToolbarSeparator></f:ToolbarSeparator>
                     <f:Tool ID="toolMax" IconFont="@IconFont.FileO" Text="最大化" OnClientClick="btnMaxView_Click();"></f:Tool>
                     <f:Tool IconFont="@IconFont.Image" Text="导出图片">
                         <Menu>
                             <f:MenuButton Text="JPG" OnClientClick="btnSaveToImg_Click('jpeg');"></f:MenuButton>
                             <f:MenuButton Text="PNG" OnClientClick="btnSaveToImg_Click('png');"></f:MenuButton>
+                            <f:MenuButton HideOnClick="false" ID="btnscale" Text="放大2倍" OnClientClick="btnscale_Click();"></f:MenuButton>
                         </Menu>
                     </f:Tool>
                 </Tools>

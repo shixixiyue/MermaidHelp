@@ -30,6 +30,8 @@ F.ready(() => {
     F.ui.messagePanel.clear = function () {
         $(`#messagePanel_Content`).html(``);
     };
+
+    F.ui.btnscale.scale = 2;
 });
 
 //#region 页面事件
@@ -51,7 +53,8 @@ function btnOpenMermaid_Click() {
 // 导出图片
 function btnSaveToImg_Click(type = 'jpeg') {
     let width = $('#mermaidSvg').width();
-    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}&scale=2`;
+    let scale = F.ui.btnscale.scale || 2;
+    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}&scale=${scale}`;
 
     fetch(dataURL)
         .then(response => response.blob())
@@ -69,6 +72,12 @@ function btnSaveToImg_Click(type = 'jpeg') {
 
 function btnMaxView_Click() {
     F.ui.rightPanel.maxView = !F.ui.rightPanel.maxView;
+}
+
+function btnscale_Click() {
+    F.ui.btnscale.scale += 2;
+    if (F.ui.btnscale.scale >= 12) F.ui.btnscale.scale = 2;
+    F.ui.btnscale.setText(`放大${F.ui.btnscale.scale}倍`);
 }
 
 /**
