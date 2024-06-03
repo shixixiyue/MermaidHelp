@@ -53,6 +53,11 @@
             background: #eee;
         }
 
+        .history.active {
+            border-width: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1)
+        }
+
         .errordiv {
             text-align: left;
             font-size: 1.1rem;
@@ -110,8 +115,18 @@
             </f:Panel>
             <f:ContentPanel ID="rightPanel" BoxFlex="3" Title="预览" ShowBorder="true" AutoScroll="true">
                 <Tools>
+                    <f:Tool ID="btnUp" Text="上一页" IconFont="@IconFont._Left" OnClientClick="btnPageChange('up');"></f:Tool>
+                    <f:Tool  ID="btnDown" Text="下一页" IconFont="@IconFont._Right" IconAlign="@IconAlign.Right" OnClientClick="btnPageChange('down');"></f:Tool>
+                    <f:ToolbarSeparator></f:ToolbarSeparator>
+                    <f:Tool  ID="btnBack" Text="退回到此" IconFont="@IconFont._Back" OnClientClick="btnPageChange('back');"></f:Tool>
+                    <f:ToolbarSeparator></f:ToolbarSeparator>
                     <f:Tool ID="toolMax" IconFont="@IconFont.FileO" Text="最大化" OnClientClick="btnMaxView_Click();"></f:Tool>
-                    <f:Tool IconFont="@IconFont.Image" Text="导出图片" OnClientClick="btnSaveToImg_Click();"></f:Tool>
+                    <f:Tool IconFont="@IconFont.Image" Text="导出图片">
+                        <Menu>
+                            <f:MenuButton Text="JPG" OnClientClick="btnSaveToImg_Click('jpeg');"></f:MenuButton>
+                            <f:MenuButton Text="PNG" OnClientClick="btnSaveToImg_Click('png');"></f:MenuButton>
+                        </Menu>
+                    </f:Tool>
                 </Tools>
             </f:ContentPanel>
         </Items>

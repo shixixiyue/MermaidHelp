@@ -1,3 +1,6 @@
+using MermaidHelp.Code;
+using System.Threading.Tasks;
+
 namespace MermaidHelp.Pages
 {
     public partial class IndexModel : BaseModel
@@ -18,6 +21,26 @@ namespace MermaidHelp.Pages
         {
             SetSession(sessionkey, new MermaidMask());
             RegisterStartupScript($"F.ui.messagePanel.clear();");
+        }
+
+        protected async Task btnPage_Click(object sender, EventArgs e)
+        {
+            var page = Request.Form["page"];
+            MermaidMask mask = GetSession<MermaidMask>(sessionkey);
+            RegisterStartupScript($"F.ui.codePanel.setText('{mask.assistantsaid[Convert.ToInt32(page)]}');");
+        }
+
+        protected async Task btnBack_Click(object sender, EventArgs e)
+        {
+            var page = Request.Form["page"];
+            var mask = new MermaidMask();
+            MermaidMask oldmask = GetSession<MermaidMask>(sessionkey);
+            for (int i = 0; i < Convert.ToInt32(page) + 1; i++)
+            {
+                mask.adduser(oldmask.usersaid[i]);
+                mask.addassistant(oldmask.assistantsaid[i]);
+            }
+            SetSession(sessionkey, mask);
         }
 
         private const string sessionkey = "Mermaid";

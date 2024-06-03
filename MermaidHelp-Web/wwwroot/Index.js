@@ -4,26 +4,26 @@ F.ready(() => {
     $('#rightPanel_Content').addClass('mermaid');
 
     mermaid.initialize({
-        startOnLoad: true,
         securityLevel: 'loose',
     });
-
+    mermaid.setParseErrorHandler((e) => {
+        console.log('e>', e);
+    })
     // 设置代码面板文本并显示代码和视图
     F.ui.codePanel.setText = function (msg) {
-        F.ui.codePanel.codeText = msg;
-        const htmlContent = markedAPI(msg, mermaidAPI);
-        document.getElementById('codePanel_Content').innerHTML = htmlContent;
-        hljs.initLineNumbersOnLoad({ singleLine: true });
+        F.ui.codePanel.codelist.push(msg);
         F.ui.messagePanel.setText(F.ui.txtInput.getText());
     };
     F.ui.codePanel.mermaidText = "";
     F.ui.codePanel.mermaidPako = "";
+    F.ui.codePanel.codelist = [];
 
     // 设置历史会话文本
     F.ui.messagePanel.setText = function (msg) {
         let msgdiv = $(`<div>${msg}</div>`).addClass("history");
         $(`#messagePanel_Content`).append(msgdiv);
         F.ui.txtInput.setText(``);
+        F.ui.messagePanel.trigger('change', $(".history").length);
     };
 
     // 清除历史会话
@@ -49,8 +49,9 @@ function btnOpenMermaid_Click() {
 }
 
 // 导出图片
-function btnSaveToImg_Click() {
-    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=png`;
+function btnSaveToImg_Click(type = 'jpeg') {
+    let width = $('#mermaidSvg').width();
+    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}&scale=2`;
 
     fetch(dataURL)
         .then(response => response.blob())
@@ -68,6 +69,35 @@ function btnSaveToImg_Click() {
 
 function btnMaxView_Click() {
     F.ui.rightPanel.maxView = !F.ui.rightPanel.maxView;
+}
+
+/**
+ * 
+ * @param {up,down,back} type
+ */
+function btnPageChange(type) {
+    switch (type) {
+        case 'up':
+            F.ui.messagePanel.pageIndex--;
+            break;
+        case 'down':
+            F.ui.messagePanel.pageIndex++;
+            break;
+        case 'back':
+            //F.ui.messagePanel.pageIndex++;
+            F.doPostBack({
+                eventTarget: 'btnBack',
+                eventArgument: 'click',
+                url: '?handler=btnBack_Click',
+                params: {
+                    page: F.ui.messagePanel.pageIndex -1
+                }
+            });
+            $('.history.active').nextAll('.history').remove();
+            F.ui.codePanel.codelist.splice(F.ui.messagePanel.pageIndex);
+            break;
+    }
+    F.ui.messagePanel.trigger('change', F.ui.messagePanel.pageIndex);
 }
 //#endregion 页面事件
 
@@ -94,7 +124,7 @@ const mermaidAPI = async (code) => {
     catch (e) {
         F.ui.rightPanel.parse = e;
     }
-    if (F.ui.rightPanel.parse===true) {
+    if (F.ui.rightPanel.parse === true) {
         F.ui.codePanel.mermaidText = code;
         F.ui.codePanel.mermaidPako = GetPako(code);
         const { svg } = await mermaid.render('mermaidSvg', code);
@@ -102,7 +132,6 @@ const mermaidAPI = async (code) => {
             document.querySelector(`#rightPanel_Content`).innerHTML = svg;
         });
     }
-   
 };
 
 // 获取 Pako 压缩的代码
@@ -150,7 +179,6 @@ F.ready(() => {
             return this.__maxView;
         }
     });
-
     F.ui.rightPanel.__parse = true;
     Object.defineProperty(F.ui.rightPanel, "parse", {
         /**
@@ -161,7 +189,7 @@ F.ready(() => {
                 $(`.errordiv`).hide().remove();
             } else {
                 let errordiv = $(`<div class="errordiv"></div>`);
-                errordiv.html("语法错误：<br/>"+val);
+                errordiv.html("语法错误：<br/>" + val);
                 $(`#rightPanel_Content`).append(errordiv);
             }
             this.__parse = val;
@@ -174,5 +202,50 @@ F.ready(() => {
     setTimeout(() => {
         $(`#dmermaidSvg`).remove();
     });
+    setBntEnable();
+
+    F.ui.messagePanel.on("change", (e,index) => {
+        F.ui.messagePanel.pageIndex = index;
+        setBntEnable();
+        $('.history').eq(index - 1).addClass("active").siblings().removeClass("active");
+
+        let msg = F.ui.codePanel.codelist[index - 1];
+        F.ui.codePanel.codeText = msg;
+        const htmlContent = markedAPI(msg, mermaidAPI);
+        document.getElementById('codePanel_Content').innerHTML = htmlContent;
+        hljs.initLineNumbersOnLoad({ singleLine: true });
+        
+    });
 })
 //#endregion 私有方法
+
+//#region 翻页
+
+function setBntEnable() {
+
+    if ($('.history').length <= 1) {
+        F.ui.btnUp.setEnabled(false);
+        F.ui.btnDown.setEnabled(false);
+        F.ui.btnBack.setEnabled(false);
+        return;
+    }
+    console.log('F.ui.messagePanel.pageIndex >', F.ui.messagePanel.pageIndex );
+    //判断当前的编号是否是最后一个
+    let pageindex = GetPageIndex();
+
+    if (pageindex >= $('.history').length) {
+        F.ui.btnUp.setEnabled(true);
+        F.ui.btnDown.setEnabled(false);
+        F.ui.btnBack.setEnabled(false);
+    } else if (pageindex < $('.history').length) {
+        F.ui.btnDown.setEnabled(true);
+        F.ui.btnBack.setEnabled(true);
+    }
+    if (pageindex == 1) {
+        F.ui.btnUp.setEnabled(false);
+    }
+}
+function GetPageIndex() {
+    return F.ui.messagePanel.pageIndex || $('.history').length;
+}
+//#endregion 翻页
