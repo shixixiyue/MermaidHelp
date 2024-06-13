@@ -71,6 +71,16 @@
         }
     </style>
 }
+
+@{
+    Func<dynamic, object> btnTemplate =
+    @<Tools>
+        <f:Tool IconFont="@IconFont._Edit" Text="到Mermaid编辑" OnClientClick=" btnOpenMermaid_Click();" />
+        <f:Tool IconFont="@IconFont.Copy" Text="复制(Markdown)" OnClientClick="btnCopy_Click();" />
+    </Tools>;
+
+}
+@using Microsoft.AspNetCore.Mvc.Razor;
 @section body {
     <f:Panel ID="mainPanel" IsViewPort="true" NoBorderAndHeader Layout="@LayoutType.HBox" BodyPadding="5">
         <Items>
@@ -78,16 +88,14 @@
                 <Items>
                     <f:ContentPanel Title="返回的代码" ID="codePanel" BoxFlex="1" AutoScroll="true" EnableCollapse="true"
                                     Expanded="true" Layout="@LayoutType.Fit" ShowBorder="true" CustomToolAhead="true">
-                        <Tools>
-                            <f:Tool IconFont="@IconFont._Edit" Text="到Mermaid编辑" OnClientClick="btnOpenMermaid_Click();"></f:Tool>
-                            <f:Tool IconFont="@IconFont.Copy" Text="复制(Markdown)" OnClientClick="btnCopy_Click();"></f:Tool>
-                        </Tools>
+
+                        @btnTemplate(null)
                     </f:ContentPanel>
                     <f:Panel ID="textPanel" BoxFlex="2" Expanded="true" Layout="@LayoutType.VBox" MarginTop="5">
                         <Items>
                             <f:ContentPanel ID="messagePanel" AutoScroll="true" Title="会话" BoxFlex="1" ShowBorder="true">
                                 <Tools>
-                                    <f:Tool IconFont="@IconFont.Refresh" Text="新建的会话" OnClick="btnRefresh_Click"></f:Tool>
+                                    <f:Tool IconFont="@IconFont.Refresh" Text="新建的会话" OnClick="btnRefresh2_Click"></f:Tool>
                                 </Tools>
                             </f:ContentPanel>
                             <f:Form ShowHeader="false" ShowBorder="false">
@@ -124,7 +132,7 @@
                     <f:Tool IconFont="@IconFont.Image" Text="导出图片">
                         <Menu>
                             <f:MenuButton Text="JPG" OnClientClick="btnSaveToImg_Click('jpeg');"></f:MenuButton>
-                            <f:MenuButton Text="PNG" OnClientClick="btnSaveToImg_Click('png');"></f:MenuButton>
+                            <f:MenuButton ID="btnpng" Text="PNG" OnClientClick="btnSaveToImg_Click('png');"></f:MenuButton>
                             <f:MenuButton HideOnClick="false" ID="btnscale" Text="放大2倍" OnClientClick="btnscale_Click();"></f:MenuButton>
                         </Menu>
                     </f:Tool>

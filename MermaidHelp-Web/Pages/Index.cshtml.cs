@@ -1,4 +1,4 @@
-using MermaidHelp.Code;
+ï»¿using MermaidHelp.Code;
 using System.Threading.Tasks;
 
 namespace MermaidHelp.Pages
@@ -40,6 +40,7 @@ namespace MermaidHelp.Pages
                 mask.adduser(oldmask.usersaid[i]);
                 mask.addassistant(oldmask.assistantsaid[i]);
             }
+
             SetSession(sessionkey, mask);
         }
 
@@ -48,24 +49,23 @@ namespace MermaidHelp.Pages
         private string GetMessage(string input)
         {
             /*
-             * ÄÃ»º´æµÄ¶Ô»°£¬Èç¹ûÃ»ÓĞ¾Ínew MermaidMask()
-             * Ìá½» ÄÃ½á¹û ÔÙ·Å»Ø»º´æ
+             * æ‹¿ç¼“å­˜çš„å¯¹è¯ï¼Œå¦‚æœæ²¡æœ‰å°±new MermaidMask()
+             * æäº¤ æ‹¿ç»“æœ å†æ”¾å›ç¼“å­˜
              */
             MermaidMask mask = GetSession<MermaidMask>(sessionkey);
-            if (mask == null) { mask = new MermaidMask(); }
+            if (mask == null)
+            {
+                mask = new MermaidMask();
+            }
+
             mask.adduser(input);
-
             var msg = mask.GetResult().Result;
-
             mask.addassistant(msg);
-
             SetSession(sessionkey, mask);
-            // ½« Windows ·ç¸ñµÄ»»ĞĞ·û \r\n Ìæ»»Îª \n
+            // å°† Windows é£æ ¼çš„æ¢è¡Œç¬¦ \r\n æ›¿æ¢ä¸º \n
             string normalizedInput = msg.Replace("\r\n", "\n");
-
-            // ½«»»ĞĞ·û \n Ìæ»»Îª <br> ±êÇ©
+            // å°†æ¢è¡Œç¬¦ \n æ›¿æ¢ä¸º <br> æ ‡ç­¾
             string output = normalizedInput.Replace("\n", "\\n");
-
             return output;
         }
     }
