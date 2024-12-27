@@ -106,6 +106,13 @@
                                 <Toolbars>
                                     <f:Toolbar Position="@ToolbarPosition.Bottom" ToolbarAlign="@ToolbarAlign.Right">
                                         <Items>
+                                            <f:Button Text="图流程图" OnClientClick="F.ui.txtInput.setValue('使用flowchart视图;');"></f:Button>
+                                            <f:Button Text="序列图" OnClientClick="F.ui.txtInput.setValue('使用sequenceDiagram视图;');"></f:Button>
+                                            <f:Button Text="类图" OnClientClick="F.ui.txtInput.setValue('使用classDiagram视图;');"></f:Button>
+                                            <f:Button Text="状态图" OnClientClick="F.ui.txtInput.setValue('使用stateDiagram-v2视图;');"></f:Button>
+                                            <f:Button Text="ER图" OnClientClick="F.ui.txtInput.setValue('使用erDiagram视图;');"></f:Button>
+                                            <f:Button Text="甘特图" OnClientClick="F.ui.txtInput.setValue('使用gantt视图;');"></f:Button>
+                                            <f:ToolbarSeparator></f:ToolbarSeparator>
                                             <f:Button Text="发送" IconFont="@IconFont.Send"
                                                       OnClickDelegate="@(e =>
                                                     {
