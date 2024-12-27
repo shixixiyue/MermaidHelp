@@ -134,16 +134,67 @@ const mermaidAPI = async (code) => {
     catch (e) {
         F.ui.rightPanel.parse = e;
     }
-    if (F.ui.rightPanel.parse === true) {
+    if (F.ui.rightPanel.parse) {
         F.ui.codePanel.mermaidText = code;
         F.ui.codePanel.mermaidPako = GetPako(code);
         const { svg } = await mermaid.render('mermaidSvg', code);
         setTimeout(() => {
             document.querySelector(`#rightPanel_Content`).innerHTML = svg;
+
+            panzoom();
         });
     }
 };
 
+function panzoom() {
+
+    var doPan = false;
+    var eventsHandler;
+    var panZoom;
+    var mousepos;
+
+    eventsHandler = {
+        haltEventListeners: ['mousedown', 'mousemove', 'mouseup']
+
+        , mouseDownHandler: function (ev) {
+            if (event.target.className == "[object SVGAnimatedString]") {
+                doPan = true;
+                mousepos = { x: ev.clientX, y: ev.clientY }
+            };
+        }
+
+        , mouseMoveHandler: function (ev) {
+            if (doPan) {
+                panZoom.panBy({ x: ev.clientX - mousepos.x, y: ev.clientY - mousepos.y });
+                mousepos = { x: ev.clientX, y: ev.clientY };
+                window.getSelection().removeAllRanges();
+            }
+        }
+
+        , mouseUpHandler: function (ev) {
+            doPan = false;
+        }
+
+        , init: function (options) {
+            options.svgElement.addEventListener('mousedown', this.mouseDownHandler, false);
+            options.svgElement.addEventListener('mousemove', this.mouseMoveHandler, false);
+            options.svgElement.addEventListener('mouseup', this.mouseUpHandler, false);
+        }
+
+        , destroy: function (options) {
+            options.svgElement.removeEventListener('mousedown', this.mouseDownHandler, false);
+            options.svgElement.removeEventListener('mousemove', this.mouseMoveHandler, false);
+            options.svgElement.removeEventListener('mouseup', this.mouseUpHandler, false);
+        }
+    }
+    panZoom = svgPanZoom('#mermaidSvg', {
+        zoomEnabled: true
+        , controlIconsEnabled: true
+        , fit: 1
+        , center: 1
+        , customEventsHandler: eventsHandler
+    })
+}
 // 获取 Pako 压缩的代码
 function GetPako(code) {
     return serialize(JSON.stringify({
