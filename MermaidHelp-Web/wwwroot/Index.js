@@ -147,7 +147,6 @@ const mermaidAPI = async (code) => {
 };
 
 function panzoom() {
-
     var doPan = false;
     var eventsHandler;
     var panZoom;
@@ -234,6 +233,8 @@ F.ready(() => {
             }
             F.ui.leftPanel.doLayout();
             F.ui.rightPanel.doLayout();
+
+            mermaidAPI(F.ui.codePanel.mermaidText);
             this.__maxView = val;
         },
         get() {
