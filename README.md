@@ -108,6 +108,10 @@ docker build -t mermaidhelp .
 ![](images/01.png)
 ![](images/02.gif)
 ![](images/03.gif)
+![](images/06.png)
+![](images/07.png)
+![](images/08.png)
+
 
 # 6. 链接
 
