@@ -61,6 +61,29 @@ services:
       - URL=
       - KEY=
 ```
+
+增加了数据库的版本
+
+```
+version: "3.8"
+services:
+  mermaidai:
+    restart: unless-stopped
+    image: 935732994/mermaidai:latest
+    ports:
+      - 8003:9090
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - MODEL=gpt-4o-mini
+      - URL=https://api.chatanywhere.tech/v1/chat/completions
+      - KEY=sk-
+      - mermaidink=https://mermaid.ink/
+    volumes:
+      - ./Data:/app/Data
+networks: {}
+```
+
 ## 3.2 本地编译
 
 需要安装 .net8 环境，我的使用的VS2022开发；
