@@ -61,29 +61,6 @@ services:
       - URL=
       - KEY=
 ```
-
-增加了数据库的版本
-
-```
-version: "3.8"
-services:
-  mermaidai:
-    restart: unless-stopped
-    image: 935732994/mermaidai:latest
-    ports:
-      - 8003:9090
-    cap_add:
-      - SYS_ADMIN
-    environment:
-      - MODEL=gpt-4o-mini
-      - URL=https://api.chatanywhere.tech/v1/chat/completions
-      - KEY=sk-
-      - mermaidink=https://mermaid.ink/
-    volumes:
-      - ./Data:/app/Data
-networks: {}
-```
-
 ## 3.2 本地编译
 
 需要安装 .net8 环境，我的使用的VS2022开发；
@@ -105,13 +82,11 @@ docker build -t mermaidhelp .
 - ~~Docker 支持~~ |  2024年5月30日
 
 # 5. 图片
-![](images/01.png)
-![](images/02.gif)
-![](images/03.gif)
-![](images/06.png)
-![](images/07.png)
-![](images/08.png)
+![](https://blog.shizhuoran.top/static/img/508af01e03614acbe3667ba38cdd4698.å¢å åè½.gif)
 
+![](https://blog.shizhuoran.top/static/img/854c71027941d915f2cf9c3fcdda7955.ç»å¾å·¥å·.gif)
+
+![](https://blog.shizhuoran.top/static/img/7126264885bfb8335962172696d8f865.ç»å¾å·¥å·2.gif.gif)
 
 # 6. 链接
 
@@ -121,6 +96,7 @@ docker build -t mermaidhelp .
 
 # 7. 结善缘
 
-![](images/04.png) 
+
+![](https://blog.shizhuoran.top/static/img/18c9e1719a9419ba2b2abb07f5e286ae.weixin20.webp)
 
  
