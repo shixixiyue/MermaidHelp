@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Primitives;
-using Newtonsoft.Json.Linq;
 
 namespace MermaidHelp
 {
@@ -52,5 +51,10 @@ namespace MermaidHelp
         /// 模型
         /// </summary>
         public string model { get; set; } = "gpt-3.5-turbo-16k-0613";//gpt-3.5-turbo|gpt-3.5-turbo-16k-0613
+
+        /// <summary>
+        ///
+        /// </summary>
+        public string mermaidink { get; set; } = "https://mermaid.ink/";
     }
 }

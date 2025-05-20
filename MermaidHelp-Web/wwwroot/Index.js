@@ -55,7 +55,7 @@ function btnSaveToImg_Click(type = 'jpeg') {
     let width = $('#mermaidSvg').width();
     let scale = F.ui.btnscale.scale || 2;
     width = width * scale;
-    const dataURL = `https://mermaid.ink/img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}`;
+    const dataURL = `${window.mermaidink}img/pako:${F.ui.codePanel.mermaidPako}?type=${type}&width=${width}`;
 
     fetch(dataURL)
         .then(response => response.blob())

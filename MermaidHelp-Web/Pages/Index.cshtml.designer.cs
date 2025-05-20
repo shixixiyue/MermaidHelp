@@ -14,7 +14,7 @@ namespace MermaidHelp.Pages
        /// </summary>
        /// <remarks>
        /// 主面板，包含整个页面的布局和内容。<br/>
-       /// 该面板设置为视口，具有边框和标题的选项，内部布局使用HBox布局，允许子面板水平排列。
+       /// 该面板允许展示左侧的输入部分和右侧的预览部分，整体采用水平布局，提供良好的用户体验。
        /// </remarks>
        protected FineUICore.Panel mainPanel;
       
@@ -22,8 +22,8 @@ namespace MermaidHelp.Pages
        /// Panel
        /// </summary>
        /// <remarks>
-       /// 左侧面板，包含代码展示区域和输入区域。<br/>
-       /// 该面板配置为VBox布局，允许子面板垂直排列，并具有可调整的宽度。
+       /// 左侧面板，主要用于展示代码和输入区域。<br/>
+       /// 该面板包含两个子面板，一个用于显示返回的代码，另一个用于输入需求，采用垂直布局。
        /// </remarks>
        protected FineUICore.Panel leftPanel;
       
@@ -31,8 +31,8 @@ namespace MermaidHelp.Pages
        /// Panel
        /// </summary>
        /// <remarks>
-       /// 代码面板，显示返回的代码。<br/>
-       /// 此面板支持自动滚动，允许折叠，并在展开时显示边框。
+       /// 内容面板，用于展示返回的代码。<br/>
+       /// 该面板支持自动滚动和折叠功能，初始状态为展开，允许用户查看长代码内容。
        /// </remarks>
        protected FineUICore.Panel codePanel;
       
@@ -40,8 +40,8 @@ namespace MermaidHelp.Pages
        /// Panel
        /// </summary>
        /// <remarks>
-       /// 文本面板，包含输入和会话内容。<br/>
-       /// 该面板也使用VBox布局，允许子面板垂直排列，提供足够的空间展示内容。
+       /// 文本面板，包含输入区域和会话记录。<br/>
+       /// 该面板支持扩展，且包含多个工具，如新建会话按钮和输入框。
        /// </remarks>
        protected FineUICore.Panel textPanel;
       
@@ -49,8 +49,8 @@ namespace MermaidHelp.Pages
        /// Panel
        /// </summary>
        /// <remarks>
-       /// 消息面板，显示会话信息。<br/>
-       /// 该面板支持自动滚动并显示边框，方便用户查看历史消息。
+       /// 消息面板，用于显示会话记录。<br/>
+       /// 该面板支持自动滚动，便于查看历史消息。
        /// </remarks>
        protected FineUICore.Panel messagePanel;
       
@@ -58,8 +58,8 @@ namespace MermaidHelp.Pages
        /// TextArea
        /// </summary>
        /// <remarks>
-       /// 输入区域，允许用户输入需求。<br/>
-       /// 该文本区域支持自动增长，最大高度为200像素，提供良好的用户体验。
+       /// 文本区，用于用户输入需求。<br/>
+       /// 支持自动增长，最大高度为200像素，提升用户输入体验。
        /// </remarks>
        protected FineUICore.TextArea txtInput;
       
@@ -67,8 +67,8 @@ namespace MermaidHelp.Pages
        /// Panel
        /// </summary>
        /// <remarks>
-       /// 右侧面板，显示预览内容。<br/>
-       /// 该面板支持自动滚动，具有适应内容的布局，并显示边框。
+       /// 右侧内容面板，主要用于展示预览内容。<br/>
+       /// 此面板支持自动滚动，且包含多个工具按钮，支持页面导航和图像导出功能。
        /// </remarks>
        protected FineUICore.Panel rightPanel;
       
@@ -76,8 +76,8 @@ namespace MermaidHelp.Pages
        /// Tool
        /// </summary>
        /// <remarks>
-       /// 上一页工具，允许用户导航到上一个视图。<br/>
-       /// 该工具使用左箭头图标，点击后触发相应的客户端事件。
+       /// 工具按钮，允许用户返回上一页。<br/>
+       /// 点击后触发页面向上导航事件。
        /// </remarks>
        protected FineUICore.Tool btnUp;
       
@@ -85,8 +85,8 @@ namespace MermaidHelp.Pages
        /// Tool
        /// </summary>
        /// <remarks>
-       /// 下一页工具，允许用户导航到下一个视图。<br/>
-       /// 该工具使用右箭头图标，点击后触发相应的客户端事件。
+       /// 工具按钮，允许用户返回下一页。<br/>
+       /// 点击后触发页面向下导航事件。
        /// </remarks>
        protected FineUICore.Tool btnDown;
       
@@ -94,8 +94,8 @@ namespace MermaidHelp.Pages
        /// Tool
        /// </summary>
        /// <remarks>
-       /// 返回工具，允许用户返回到特定的视图。<br/>
-       /// 该工具使用返回图标，点击后触发相应的客户端事件。
+       /// 工具按钮，允许用户退回到指定页面。<br/>
+       /// 点击后触发退回事件，便于用户快速返回。
        /// </remarks>
        protected FineUICore.Tool btnBack;
       
@@ -103,8 +103,8 @@ namespace MermaidHelp.Pages
        /// Tool
        /// </summary>
        /// <remarks>
-       /// 最大化工具，允许用户将预览面板最大化。<br/>
-       /// 该工具使用文件图标，点击后触发最大化事件。
+       /// 工具按钮，用于最大化预览内容。<br/>
+       /// 点击后会将预览区域最大化，提供更好的查看体验。
        /// </remarks>
        protected FineUICore.Tool toolMax;
       
@@ -112,8 +112,8 @@ namespace MermaidHelp.Pages
        /// MenuButton
        /// </summary>
        /// <remarks>
-       /// PNG导出按钮，允许用户将内容导出为PNG格式。<br/>
-       /// 该按钮点击后触发相应的客户端事件。
+       /// 菜单按钮，用于导出PNG格式的图片。<br/>
+       /// 点击后会触发导出图片的事件，允许用户保存预览内容。
        /// </remarks>
        protected FineUICore.MenuButton btnpng;
       
@@ -121,8 +121,8 @@ namespace MermaidHelp.Pages
        /// MenuButton
        /// </summary>
        /// <remarks>
-       /// 放大按钮，允许用户将预览内容放大2倍。<br/>
-       /// 该按钮点击后触发相应的客户端事件。
+       /// 菜单按钮，用于放大预览内容。<br/>
+       /// 点击后会触发放大事件，便于用户查看细节。
        /// </remarks>
        protected FineUICore.MenuButton btnscale;
       

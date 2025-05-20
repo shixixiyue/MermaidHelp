@@ -1,12 +1,13 @@
-﻿using MermaidHelp.Code;
-using System.Threading.Tasks;
-
-namespace MermaidHelp.Pages
+﻿namespace MermaidHelp.Pages
 {
     public partial class IndexModel : BaseModel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                ViewBag.mermaidink = HelpStep.Projects.mermaidink;
+            }
         }
 
         protected async Task txtInput_Enter(object sender, EventArgs e)
